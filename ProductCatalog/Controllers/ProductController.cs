@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
+using ProductCatalog.Models;
 using ProductCatalog.Models.ViewModels;
 
 namespace ProductCatalog.Controllers
@@ -34,6 +35,25 @@ namespace ProductCatalog.Controllers
                 Categories = categories
             };
             return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateProductViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Categories = await _context.Categories.ToListAsync();
+                return View(viewModel);
+            }
+            var newProduct = new Product
+            {
+                Name = viewModel.ProductName,
+                Price = viewModel.Price,
+                CategoryId = viewModel.CategoryId
+            };
+            _context.Products.Add(newProduct);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }
