@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProductCatalog.Models.ViewModels
 {
+        [Keyless]
 	public class CreateProductViewModel
 	{
         [Required(ErrorMessage = "Please put a name")]

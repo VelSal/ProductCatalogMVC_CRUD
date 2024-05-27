@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Models;
+using ProductCatalog.Models.ViewModels;
 
 namespace ProductCatalog.Data
 {
@@ -30,5 +31,6 @@ namespace ProductCatalog.Data
             SeedData.AddRecords(modelBuilder);
         }
         public DbSet<ProductCatalog.Models.ViewModels.ProductCategoryViewModel> ProductCategoryViewModels { get; set; } = default!;
+        public DbSet<ProductCatalog.Models.ViewModels.CreateProductViewModel> CreateProductViewModel { get; set; } = default!;
     }
 }

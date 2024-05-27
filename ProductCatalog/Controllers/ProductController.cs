@@ -26,6 +26,14 @@ namespace ProductCatalog.Controllers
             return View(productCategoryViewModel);
         }
 
-        public async Task<IActionResult> Create() 
+        public async Task<IActionResult> Create()
+        {
+            var categories = await _context.Categories.ToListAsync();
+            var viewModel = new CreateProductViewModel
+            {
+                Categories = categories
+            };
+            return View(viewModel);
+        }
     }
 }
